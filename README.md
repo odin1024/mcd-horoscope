@@ -17,8 +17,8 @@
 点开即玩，无需安装任何环境（真实麦当劳 MCP 数据实时运行）：
 
 <p align="center">
-  <a href="https://mcd-horoscope-6w4zk32jq-jones1009s-projects.vercel.app">
-    <img src="https://img.shields.io/badge/🚀%20在线体验-麦门星盘%20MCD%20Horoscope-FFC72C?style=for-the-badge&logo=vercel" alt="在线体验麦门星盘" />
+  <a href="https://wkgmqfqrspzh.cloud.sealos.io">
+    <img src="https://img.shields.io/badge/🚀%20在线体验-麦门星盘%20MCD%20Horoscope-FFC72C?style=for-the-badge&logo=cloud" alt="在线体验麦门星盘" />
   </a>
 </p>
 
