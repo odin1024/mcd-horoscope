@@ -26,18 +26,21 @@
 
 ---
 
-## 产品截图
+## 界面截图
 
 <p align="center">
   <img src="./docs/screenshot-result.png" alt="麦门星盘结果页" width="72%" />
 </p>
 
 <p align="center">
-  <img src="./docs/screenshot-home.png" alt="麦门星盘首页" width="45%" />
-  <img src="./docs/screenshot-gallery.png" alt="12 款麦门人格图谱" width="45%" />
+  <img src="./docs/screenshot-home.png" alt="麦门星盘首页" width="72%" />
 </p>
 
-*左侧：首页 · 右侧：12 款人格图谱（图中为真实 MCP 数据运行效果）*
+<p align="center">
+  <img src="./docs/screenshot-gallery.png" alt="12 款麦门人格图谱" width="72%" />
+</p>
+
+*从上到下：结果页 · 首页 · 12 款人格图谱（图中为真实 MCP 数据运行效果）*
 
 ---
 
