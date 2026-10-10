@@ -1,0 +1,252 @@
+/* ============================================================
+   麦门星盘 — 移动端优先 · 桌面自适应 · 麦门红金 · 零外部依赖
+   视觉升级版：人格图腾 / 营养环形图 / 运势等级光晕 / 12 人格图谱
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+:root {
+  --red: #DA291C;
+  --red-dark: #B01A10;
+  --gold: #FFC72C;
+  --ink: #14100E;
+  --card-color: #DA291C;   /* 由结果页按人格动态覆盖 */
+  --muted: #8A8178;
+  --line: rgba(255, 255, 255, .14);
+}
+
+html, body {
+  background:
+    radial-gradient(1100px 480px at 50% -12%, #3a1d14 0%, transparent 60%),
+    radial-gradient(800px 400px at 85% 110%, rgba(218, 41, 28, .14) 0%, transparent 60%),
+    var(--ink);
+  background-attachment: fixed;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+  min-height: 100%;
+}
+
+#app { max-width: 520px; margin: 0 auto; padding: 0 18px calc(24px + env(safe-area-inset-bottom)); }
+
+/* ---------- 顶栏 ---------- */
+.topbar { display: flex; align-items: center; justify-content: space-between; padding: 20px 0 8px; }
+.brand { display: flex; align-items: center; gap: 9px; }
+.brand-m {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), #e6a800);
+  color: var(--red-dark); font-weight: 900; font-size: 21px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 16px rgba(255, 199, 44, .4);
+}
+.brand-name { font-size: 18px; font-weight: 800; letter-spacing: 1px; }
+.brand-sub { font-size: 10px; letter-spacing: 2.5px; color: var(--muted); border-left: 1px solid var(--line); padding-left: 9px; }
+.mode-badge {
+  font-size: 11px; color: var(--gold); border: 1px solid rgba(255,199,44,.5);
+  padding: 3px 9px; border-radius: 20px; white-space: nowrap;
+}
+
+/* ---------- 视图切换 ---------- */
+.view { animation: fadeUp .38s ease both; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* ---------- 首页 ---------- */
+.hero { text-align: center; padding: 40px 0 12px; }
+.arches { display: flex; justify-content: center; gap: 4px; margin-bottom: 10px; }
+.arch { width: 58px; height: 66px; border-radius: 58px 58px 10px 10px; background: linear-gradient(160deg, var(--gold), #d9a000); position: relative; box-shadow: 0 10px 30px rgba(255, 199, 44, .25); }
+.arch::after { content: ""; position: absolute; inset: 8px 8px 0; border-radius: 50px 50px 0 0; background: var(--ink); }
+.arch-l { transform: skewY(-4deg); }
+.arch-r { transform: skewY(4deg); }
+.hero-title { font-size: 36px; font-weight: 900; line-height: 1.22; margin: 16px 0 10px; letter-spacing: 1px; }
+.hero-title em { font-style: normal; color: var(--gold); }
+.hero-sub { font-size: 15px; color: #d9d2c8; line-height: 1.7; margin-bottom: 26px; }
+.nick-input {
+  width: 100%; padding: 14px 16px; font-size: 16px; border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.06);
+  color: #fff; outline: none; margin-bottom: 14px; text-align: center;
+}
+.nick-input::placeholder { color: #9b938a; }
+.nick-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(255,199,44,.15); }
+
+.btn { border: none; cursor: pointer; font-weight: 700; border-radius: 14px; font-size: 16px; transition: transform .12s ease, box-shadow .2s ease, background .2s ease; }
+.btn:active { transform: scale(.97); }
+.btn-primary { background: linear-gradient(135deg, var(--gold), #e6a800); color: var(--red-dark); }
+.btn-lg { width: 100%; padding: 16px; font-size: 18px; box-shadow: 0 8px 24px rgba(255, 199, 44, .28); }
+.btn-ghost { background: rgba(255,255,255,.08); color: #fff; border: 1px solid rgba(255,255,255,.2); padding: 13px 18px; font-size: 14px; }
+.btn-ghost:hover { background: rgba(255,255,255,.13); }
+.hero-note { margin-top: 16px; font-size: 12px; color: var(--muted); }
+
+/* ---------- 答题 ---------- */
+.quiz-head { display: flex; align-items: center; gap: 12px; padding: 24px 0 8px; }
+.progress-text { font-size: 13px; color: var(--gold); font-weight: 700; min-width: 40px; }
+.progress-bar { flex: 1; height: 6px; border-radius: 6px; background: rgba(255,255,255,.12); overflow: hidden; }
+.progress-bar i { display: block; height: 100%; width: 20%; border-radius: 6px; background: linear-gradient(90deg, var(--gold), #ffd95e); transition: width .3s ease; }
+.quiz-question { font-size: 21px; font-weight: 800; line-height: 1.45; margin: 20px 0 22px; }
+.quiz-options { display: flex; flex-direction: column; gap: 12px; }
+.quiz-option {
+  text-align: left; width: 100%; padding: 17px 18px; font-size: 16px; line-height: 1.5;
+  border-radius: 16px; border: 1.5px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.05); color: #fff; cursor: pointer;
+  transition: border-color .15s ease, background .15s ease, transform .1s ease;
+  position: relative;
+}
+.quiz-option:hover { border-color: var(--gold); background: rgba(255,199,44,.09); }
+.quiz-option:active { transform: scale(.98); }
+
+/* ---------- 结果卡（可截图分享） ---------- */
+.result-card {
+  margin-top: 20px; border-radius: 24px; overflow: hidden;
+  background: linear-gradient(180deg, #2a150e 0%, #1d100a 100%);
+  border: 1px solid rgba(255,199,44,.22);
+  box-shadow: 0 20px 56px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.03) inset;
+  position: relative;
+}
+.result-card::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(600px 200px at 50% -10%, color-mix(in srgb, var(--card-color) 34%, transparent), transparent 70%);
+  opacity: .5;
+}
+
+/* 人格图腾 */
+.totem {
+  width: 96px; height: 96px; margin: 0 auto 16px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(255,255,255,.16), transparent 60%),
+    conic-gradient(from 210deg, var(--card-color), #5a1a10 55%, var(--card-color));
+  box-shadow: 0 0 0 5px rgba(255,255,255,.07), 0 14px 34px color-mix(in srgb, var(--card-color) 55%, transparent);
+  animation: totemIn .5s cubic-bezier(.2,1.4,.4,1) both;
+}
+@keyframes totemIn { from { transform: scale(.6) rotate(-8deg); opacity: 0; } to { transform: none; opacity: 1; } }
+.totem-icon { font-size: 46px; line-height: 1; filter: drop-shadow(0 6px 10px rgba(0,0,0,.4)); }
+
+.card-top {
+  padding: 30px 22px 22px; text-align: center;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--card-color) 88%, #000 12%), color-mix(in srgb, var(--card-color) 60%, #3a0e06 40%));
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.card-kicker { font-size: 12px; letter-spacing: 3px; color: var(--gold); font-weight: 700; }
+.card-title { font-size: 32px; font-weight: 900; margin-top: 6px; line-height: 1.2; text-shadow: 0 2px 12px rgba(0,0,0,.3); }
+.card-food { font-size: 16px; margin-top: 8px; color: #ffe9dd; font-weight: 600; }
+.card-sign { font-size: 13px; margin-top: 5px; color: rgba(255,255,255,.85); }
+.card-motto { font-size: 14px; margin-top: 16px; line-height: 1.65; color: #fff; font-style: italic; border-top: 1px dashed rgba(255,255,255,.3); padding-top: 14px; max-width: 420px; margin-left: auto; margin-right: auto; }
+
+.card-body { padding: 20px 22px 0; }
+
+.card-traits { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 18px; }
+.card-traits span {
+  font-size: 13px; padding: 7px 14px; border-radius: 20px;
+  background: rgba(255,199,44,.13); color: var(--gold);
+  border: 1px solid rgba(255,199,44,.32);
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,.12);
+}
+
+/* 营养可视化 */
+.card-nutrition { padding: 16px; border-radius: 16px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); margin-bottom: 16px; }
+.card-nutrition .nut-head { font-size: 13px; color: var(--gold); font-weight: 700; margin-bottom: 12px; letter-spacing: 1px; }
+.nut-grid { display: grid; grid-template-columns: 128px 1fr; gap: 18px; align-items: center; }
+.nut-ring-wrap { position: relative; width: 128px; height: 128px; margin: 0 auto; }
+.nut-ring { transform: rotate(-90deg); }
+.nut-ring-track { fill: none; stroke: rgba(255,255,255,.1); stroke-width: 10; }
+.nut-ring-fill { fill: none; stroke: var(--gold); stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 1s ease; filter: drop-shadow(0 0 6px rgba(255,199,44,.5)); }
+.nut-ring-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.nut-ring-v { font-size: 26px; font-weight: 900; line-height: 1; }
+.nut-ring-k { font-size: 11px; color: #b9b0a6; margin-top: 3px; }
+.nut-bars { display: flex; flex-direction: column; gap: 10px; }
+.nut-bar-row { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+.nut-bar-label { width: 42px; color: #d9d2c8; flex-shrink: 0; }
+.nut-bar-track { flex: 1; height: 8px; border-radius: 8px; background: rgba(255,255,255,.1); overflow: hidden; }
+.nut-bar-fill { display: block; height: 100%; width: 0; border-radius: 8px; background: var(--bar, var(--gold)); transition: width 1s ease; }
+.nut-bar-v { width: 34px; text-align: right; font-weight: 800; color: #fff; flex-shrink: 0; }
+.nut-note { margin-top: 2px; font-size: 11px; color: #9b938a; grid-column: 1 / -1; }
+
+/* 运势与指引 */
+.card-oracle {
+  padding: 16px; border-radius: 16px; margin-bottom: 6px;
+  background: linear-gradient(140deg, rgba(255,199,44,.15), rgba(255,199,44,.04));
+  border: 1px solid rgba(255,199,44,.3);
+}
+.oracle-fortune { font-size: 18px; font-weight: 800; color: var(--gold); display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.oracle-fortune .fortune-mark { font-size: 22px; letter-spacing: 1px; }
+.oracle-fortune small { font-size: 13px; color: #ffe9dd; font-weight: 500; }
+.oracle-fortune.level-daiji { color: #FFE082; }
+.oracle-fortune.level-daiji .fortune-mark { text-shadow: 0 0 18px rgba(255, 224, 130, .8); }
+.oracle-fortune.level-zhongji { color: #FFC72C; }
+.oracle-fortune.level-zhongji .fortune-mark { text-shadow: 0 0 14px rgba(255, 199, 44, .7); }
+.oracle-fortune.level-xiaoji { color: #9FC7E8; }
+.oracle-fortune.level-xiaoji .fortune-mark { text-shadow: 0 0 14px rgba(159, 199, 232, .6); }
+.oracle-activity { margin-top: 10px; font-size: 14px; line-height: 1.55; color: #ffe9dd; }
+.oracle-activity b { color: var(--gold); }
+.oracle-advice { margin-top: 10px; font-size: 14px; line-height: 1.6; color: #f2ede4; }
+.oracle-lucky { margin-top: 12px; font-size: 13px; color: #d9c9a8; border-top: 1px dashed rgba(255,199,44,.35); padding-top: 11px; line-height: 1.6; }
+
+.card-watermark { text-align: center; font-size: 11px; letter-spacing: 2.5px; color: #6b635a; padding: 18px 0 16px; }
+
+/* ---------- 结果操作区 ---------- */
+.result-actions { display: flex; gap: 10px; margin-top: 18px; }
+.result-actions .btn-primary { flex: 1.5; padding: 14px; }
+.result-actions .btn-ghost { flex: 1; padding: 14px 10px; font-size: 13px; }
+.share-tip { text-align: center; margin-top: 12px; color: var(--gold); font-size: 14px; }
+
+/* ---------- 12 人格图谱 ---------- */
+.gallery-head { text-align: center; padding: 26px 0 18px; }
+.gallery-title { font-size: 26px; font-weight: 900; }
+.gallery-sub { font-size: 13px; color: var(--muted); margin-top: 8px; }
+.gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.g-item {
+  border-radius: 16px; padding: 18px 14px 16px; text-align: center; cursor: pointer;
+  border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.04);
+  transition: transform .15s ease, border-color .15s ease;
+  position: relative; overflow: hidden;
+}
+.g-item:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--g-color) 70%, transparent); }
+.g-item::before {
+  content: ""; position: absolute; inset: 0; opacity: .12; pointer-events: none;
+  background: radial-gradient(120px 80px at 50% 0%, var(--g-color), transparent 75%);
+}
+.g-icon { font-size: 38px; line-height: 1; display: block; margin-bottom: 8px; filter: drop-shadow(0 4px 8px rgba(0,0,0,.35)); }
+.g-title { font-size: 15px; font-weight: 800; }
+.g-food { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.g-sign { font-size: 11px; color: #b9b0a6; margin-top: 3px; }
+.gallery-actions { margin-top: 20px; }
+
+/* ---------- 页脚 ---------- */
+.footer { text-align: center; font-size: 11px; color: #5c554d; margin-top: 30px; line-height: 1.7; }
+
+/* ============================================================
+   桌面端自适应（≥ 880px）
+   ============================================================ */
+@media (min-width: 880px) {
+  #app { max-width: 1000px; padding: 0 28px calc(40px + env(safe-area-inset-bottom)); }
+  .topbar { padding: 26px 0 12px; }
+  .brand-name { font-size: 21px; }
+
+  /* 首页更大气 */
+  .hero { padding: 66px 0 26px; }
+  .arch { width: 74px; height: 84px; border-radius: 74px 74px 12px 12px; }
+  .hero-title { font-size: 52px; }
+  .hero-sub { font-size: 17px; }
+  .nick-input { max-width: 340px; }
+  .btn-lg { max-width: 340px; }
+
+  /* 答题 */
+  .quiz-question { font-size: 25px; text-align: center; }
+  .quiz-options { flex-direction: row; flex-wrap: wrap; gap: 14px; }
+  .quiz-option { width: calc(50% - 7px); padding: 20px; font-size: 17px; }
+  .quiz-option::after { content: "→"; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: rgba(255,199,44,.5); font-size: 18px; opacity: 0; transition: opacity .15s ease; }
+  .quiz-option:hover::after { opacity: 1; }
+
+  /* 结果卡：双栏 */
+  .result-card { display: grid; grid-template-columns: 1.15fr 1fr; }
+  .card-top { border-bottom: none; border-right: 1px solid rgba(255,255,255,.1); display: flex; flex-direction: column; justify-content: center; padding: 40px 30px; }
+  .card-body { padding: 28px 28px 0; }
+  .totem { width: 120px; height: 120px; }
+  .totem-icon { font-size: 56px; }
+  .card-title { font-size: 38px; }
+  .card-watermark { grid-column: 1 / -1; }
+
+  /* 结果操作区居中 */
+  .result-actions { max-width: 640px; margin-left: auto; margin-right: auto; }
+
+  /* 图谱 4 列 */
+  .gallery-grid { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .g-item { padding: 22px 16px 18px; }
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="麦门星盘——测出你的麦门星座人格，领取今日麦门指引。基于麦当劳 MCP 真实营养与活动数据。" />
+  <meta property="og:title" content="麦门星盘 · 测出你的麦门星座" />
+  <meta property="og:description" content="5 道快问快答，12 款麦门人格，真实营养卡 + 今日麦门指引，一键分享。" />
+  <title>麦门星盘 · 测出你的麦门星座</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23FFC72C'/%3E%3Ctext x='32' y='44' font-size='36' font-weight='900' text-anchor='middle' fill='%23DA291C' font-family='Arial'%3EM%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-m">M</span>
+        <span class="brand-name">麦门星盘</span>
+        <span class="brand-sub">MCD HOROSCOPE</span>
+      </div>
+      <span id="mode-badge" class="mode-badge" hidden></span>
+    </header>
+
+    <main>
+      <!-- 首页 -->
+      <section id="view-home" class="view">
+        <div class="hero">
+          <div class="arches" aria-hidden="true">
+            <span class="arch arch-l"></span>
+            <span class="arch arch-r"></span>
+          </div>
+          <h1 class="hero-title">你是麦门的<br />哪一颗星？</h1>
+          <p class="hero-sub">5 道快问快答 · 测出你的麦门星座人格<br />领取今日麦门指引 · 每天都不一样</p>
+          <input id="nickname" class="nick-input" type="text" maxlength="12" placeholder="昵称（可选）" />
+          <button id="btn-start" class="btn btn-primary btn-lg">开始测测</button>
+          <p class="hero-note">基于麦当劳 MCP 真实餐品营养与活动数据</p>
+        </div>
+      </section>
+
+      <!-- 答题 -->
+      <section id="view-quiz" class="view" hidden>
+        <div class="quiz-head">
+          <div class="progress-text" id="quiz-progress-text">1 / 5</div>
+          <div class="progress-bar"><i id="quiz-progress-fill"></i></div>
+        </div>
+        <h2 class="quiz-question" id="quiz-question"></h2>
+        <div class="quiz-options" id="quiz-options"></div>
+      </section>
+
+      <!-- 结果 -->
+      <section id="view-result" class="view" hidden>
+        <div id="result-card" class="result-card">
+          <div class="card-top">
+            <div class="totem" aria-hidden="true"><span id="res-icon" class="totem-icon"></span></div>
+            <div class="card-kicker" id="res-kicker"></div>
+            <div class="card-title" id="res-title"></div>
+            <div class="card-food" id="res-food"></div>
+            <div class="card-sign" id="res-sign"></div>
+            <div class="card-motto" id="res-motto"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-traits" id="res-traits"></div>
+            <div class="card-nutrition" id="res-nutrition">
+              <div class="nut-grid">
+                <div class="nut-ring-wrap">
+                  <svg id="nut-ring" class="nut-ring" viewBox="0 0 120 120"></svg>
+                  <div class="nut-ring-center">
+                    <div class="nut-ring-v" id="nut-ring-v">--</div>
+                    <div class="nut-ring-k">千卡</div>
+                  </div>
+                </div>
+                <div class="nut-bars">
+                  <div class="nut-bar-row"><span class="nut-bar-label">蛋白质</span><span class="nut-bar-track"><i id="nut-bar-protein" class="nut-bar-fill" style="--bar:#ffd95e"></i></span><span class="nut-bar-v" id="nut-bar-protein-v">-</span></div>
+                  <div class="nut-bar-row"><span class="nut-bar-label">脂肪</span><span class="nut-bar-track"><i id="nut-bar-fat" class="nut-bar-fill" style="--bar:#ff9d5c"></i></span><span class="nut-bar-v" id="nut-bar-fat-v">-</span></div>
+                  <div class="nut-bar-row"><span class="nut-bar-label">碳水</span><span class="nut-bar-track"><i id="nut-bar-carb" class="nut-bar-fill" style="--bar:#7fd0a3"></i></span><span class="nut-bar-v" id="nut-bar-carb-v">-</span></div>
+                  <div class="nut-note" id="nut-note"></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-oracle">
+              <div class="oracle-fortune" id="res-fortune"></div>
+              <div class="oracle-activity" id="res-activity"></div>
+              <div class="oracle-advice" id="res-advice"></div>
+              <div class="oracle-lucky" id="res-lucky"></div>
+            </div>
+          </div>
+          <div class="card-watermark">MCD HOROSCOPE · 麦门星盘</div>
+        </div>
+        <div class="result-actions">
+          <button id="btn-share" class="btn btn-primary">复制分享文案</button>
+          <button id="btn-gallery" class="btn btn-ghost">12 款人格图谱</button>
+          <button id="btn-retry" class="btn btn-ghost">再测一次</button>
+        </div>
+        <p id="share-tip" class="share-tip" hidden>已复制，快去晒出你的麦门星座吧</p>
+      </section>
+
+      <!-- 12 款人格图谱 -->
+      <section id="view-gallery" class="view" hidden>
+        <div class="gallery-head">
+          <h2 class="gallery-title">12 款麦门人格图谱</h2>
+          <p class="gallery-sub">看看你的朋友会是哪颗星？测测看</p>
+        </div>
+        <div class="gallery-grid" id="gallery-grid"></div>
+        <div class="gallery-actions">
+          <button id="btn-gallery-back" class="btn btn-primary btn-lg">我也来测测</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      麦门星盘 · 麦当劳程序员创意开发大赛参赛作品（非麦当劳官方产品）
+    </footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

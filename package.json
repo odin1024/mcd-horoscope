@@ -1,0 +1,24 @@
+{
+  "name": "mcd-horoscope",
+  "version": "1.0.0",
+  "description": "麦门星盘——测出你的麦门星座人格，领取今日麦门指引。基于麦当劳中国 MCP 真实营养与活动数据。",
+  "main": "server.js",
+  "type": "commonjs",
+  "private": false,
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "mcdonalds",
+    "mcp",
+    "skill",
+    "horoscope",
+    "麦当劳",
+    "麦门"
+  ],
+  "license": "MIT"
+}
