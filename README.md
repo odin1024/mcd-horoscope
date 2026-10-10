@@ -18,7 +18,7 @@
 
 <p align="center">
   <a href="https://wkgmqfqrspzh.cloud.sealos.io">
-    <img src="https://img.shields.io/badge/🚀%20在线体验-麦门星盘%20MCD%20Horoscope-FFC72C?style=for-the-badge&logo=cloud" alt="在线体验麦门星盘" />
+    <img src="https://img.shields.io/badge/%F0%9F%9A%80%20%E5%9C%A8%E7%BA%BF%E4%BD%93%E9%AA%8C-%E9%BA%A6%E9%97%A8%E6%98%9F%E7%9B%98%20MCD%20Horoscope-FFC72C?style=for-the-badge" alt="在线体验麦门星盘" />
   </a>
 </p>
 
